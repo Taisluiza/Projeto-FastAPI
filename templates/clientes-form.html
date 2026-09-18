@@ -4,35 +4,49 @@
 
 {% block conteudo %}
 <div class="container">
-    <h1>{{ 'Editar' if cliente else 'Cadastrar Novo' }} Cliente {{cliente_id}}</h1>
+    <h1>{{ 'Editar' if cliente else 'Cadastrar Novo' }} Cliente {{ cliente_id if cliente else '' }}</h1>
     
     <form id="formCliente" class="form-cliente">
-        <div class="form-group">
-            <label for="nome">Nome *</label>
-            <input type="text" id="nome" name="nome" class="form-control" value="{{ cliente.nome if cliente else '' }}" required>
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome *</label>
+            <input type="text" id="nome" name="nome" class="form-control" 
+                   value="{{ cliente.nome if cliente else '' }}" required>
         </div>
         
-        <div class="form-group">
-            <label for="email">Email *</label>
-            <input type="email" id="email" name="email" class="form-control" value="{{ cliente.email if cliente else '' }}" required>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email *</label>
+            <input type="email" id="email" name="email" class="form-control" 
+                   value="{{ cliente.email if cliente else '' }}" required>
         </div>
         
-        <div class="form-group">
-            <label for="telefone">Telefone *</label>
-            <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="(00) 00000-0000" value="{{ cliente.telefone if cliente else '' }}" required>
+        <div class="mb-3">
+            <label for="telefone" class="form-label">Telefone *</label>
+            <input type="tel" id="telefone" name="telefone" class="form-control" 
+                   placeholder="(00) 00000-0000" 
+                   value="{{ cliente.telefone if cliente else '' }}" required>
         </div>
         
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary">{{ 'Atualizar' if cliente else 'Cadastrar' }} Cliente</button>
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-primary">
+                {{ 'Atualizar' if cliente else 'Cadastrar' }} Cliente
+            </button>
             <a href="/clientes" class="btn btn-secondary">Cancelar</a>
         </div>
     </form>
 </div>
 
 <script>
-// Define se é edição ou criação
-const isEdit = {{ 'true' if cliente else 'false' }};
-const clienteId = {{ cliente.id_ if cliente else 'null' }};
+    // Define se é edição ou criação
+    const isEdit = "{{ 'true' if cliente else 'false' }}";
+    const clienteId = "{{ cliente.id_ if cliente else '' }}";
+
+    // Converter para boolean/número no JS
+    const editMode = (isEdit === "true");
+    const idCliente = clienteId !== "" ? clienteId : null;
+</script>
+
+
+
 
 document.getElementById('formCliente').addEventListener('submit', async (e) => {
     e.preventDefault();
