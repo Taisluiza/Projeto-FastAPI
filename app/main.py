@@ -9,8 +9,8 @@ from app.autenticacao_middleware import AuthenticationToken
 templates = Jinja2Templates(directory="templates")
 
 app = FastAPI(
-    title="Techlog Solutions API",
-    description="CRM para Techlog Solutions",
+    title="Siat Solutions API",
+    description="CRM para Siat Solutions",
     version="1.0.0",
 )
 
@@ -29,7 +29,7 @@ async def health_check():
 
 @app.get("/", response_class=HTMLResponse)
 async def front_page(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "titulo": "Techlog Solutions CRM", "versao": "1.0.0"})
+    return templates.TemplateResponse("index.html", {"request": request, "titulo": "Siat Solutions CRM", "versao": "1.0.0"})
 
 
 @app.get("/logout")

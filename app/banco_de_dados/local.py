@@ -2,7 +2,7 @@ import sqlite3
 from contextlib import contextmanager
 
 class BancoDeDadosLocal():
-    def __init__(self, nome_arquivo='techlog.db'):
+    def __init__(self, nome_arquivo='Siat.db'):
         self.nome_arquivo = nome_arquivo
         self.inicializar_banco()
 
